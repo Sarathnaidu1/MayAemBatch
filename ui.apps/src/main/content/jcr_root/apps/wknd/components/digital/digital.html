@@ -1,2 +1,28 @@
-<h1>${properties.text}</h1>
-<p>${properties.desc}</p>
+<head data-sly-use.clientLib="${'/libs/granite/sightly/templates/clientlib.html'}">
+    <!-- Load CSS & JS clientlib -->
+    <meta data-sly-call="${clientLib.all @ categories='may.dependenices'}" data-sly-unwrap></meta>
+</head>
+
+<body data-sly-use.model="com.adobe.aem.guides.wknd.core.models.DigitalParent">
+
+    ${model.text}<br>
+    ${model.desc}<br>
+
+    <div data-sly-list.item="${model.bookdetailswithmap}">
+        <div class="booktitle">
+            <h1>${item.bookname}</h1>
+        </div>
+        <h1>${item.booksubject}</h1><br>
+        <h1>
+            <div>${'yyyy-MM-dd HH:mm' @ format=item.bookpublishdate, timezone='UTC'}</div>
+        </h1>
+
+        <div data-sly-list.writer="${item.bookdetailswithwriter}">
+          <h2>${writer.writername}</h2>
+          <h2>${writer.writernum}</h2>
+          <h1>
+            <div>${'yyyy-MM-dd HH:mm' @ format=writer.writerdob, timezone='UTC'}</div>
+        </h1>
+        </div>
+</body>
+
